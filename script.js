@@ -1,239 +1,234 @@
-// ── Service Worker registration ───────────────────────────────────────────────
-// Registers sw.js, which fixes Safari/iOS stale-cache issues by using a
-// network-first fetch strategy that bypasses the browser's disk cache.
-
+// Service Worker
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
-    });
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
 }
 
-// ── GitHub Projects ───────────────────────────────────────────────────────────
-
-const GITHUB_USERNAME = 'CtrlUserKnown';
-
-// Add repo names here to control what shows in the Projects panel.
-// Each repo should have a description written in its GitHub "About" field.
-const FEATURED_REPOS = [
-    'Charvim',
-    'dots',
-    'GabyLearnsPython',
-    'pylings-tui',
-    'Capella.it2249',
-    'Capella.it3240',
-];
-
-// Uncomment and paste your token here if you ever need to raise the rate limit
-// from 60 to 5,000 requests/hr. Not needed for normal portfolio use.
-// const GITHUB_TOKEN = 'ghp_yourTokenHere';
-
-async function loadGitHubProjects() {
-    const container = document.getElementById('projects-container');
-    if (!container) return;
-
-    const headers = { 'Accept': 'application/vnd.github+json' };
-    // if (GITHUB_TOKEN) headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
-
-    try {
-        const results = await Promise.all(
-            FEATURED_REPOS.map(name =>
-                fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${name}`, { headers })
-                    .then(r => r.ok ? r.json() : null)
-                    .catch(() => null)
-            )
-        );
-
-        const repos = results.filter(Boolean);
-
-        if (repos.length === 0) {
-            container.innerHTML = '<p class="muted-text">Could not load projects right now.</p>';
-            return;
-        }
-
-        container.innerHTML = repos.map(repo => {
-            const title = repo.name
-                .replace(/-/g, ' ')
-                .replace(/\b\w/g, l => l.toUpperCase());
-
-            const description = repo.description
-                || 'No description yet — add one in the repo\'s About section on GitHub.';
-
-            const topics = (repo.topics || [])
-                .map(t => `<span class="tag small">${t}</span>`)
-                .join('');
-
-            const language = repo.language
-                ? `<span class="tag small">${repo.language}</span>`
-                : '';
-
-            const tags = topics || language
-                ? `<div class="tag-grid" style="margin-top:0.6rem">${topics}${language}</div>`
-                : '';
-
-            const updated = new Date(repo.updated_at).toLocaleDateString('en-US', {
-                month: 'short', year: 'numeric'
-            });
-
-            return `
-                <a class="card" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
-                    <h3>${title}</h3>
-                    <p>${description}</p>
-                    ${tags}
-                    <span class="muted-text" style="font-size:0.72rem;display:block;margin-top:0.6rem">
-                        Updated ${updated}
-                    </span>
-                </a>`;
-        }).join('');
-
-    } catch {
-        container.innerHTML = '<p class="muted-text">Could not load projects right now.</p>';
+// Slideshow - slide push with no page scroll and staggered entries
+const nav = document.querySelectorAll('.main-nav a[data-to]');
+const sections = ['about','skills','projects','cv'].map(id=>document.getElementById(id)).filter(Boolean);
+let curId = null;
+const initialId = sections.find(s=> s.classList.contains('active'))?.id || sections[0]?.id;
+show(initialId);
+function show(id){
+  if(id===curId) return;
+  const outgoing = document.getElementById(curId);
+  const incoming = document.getElementById(id);
+  if(outgoing){
+    outgoing.classList.add('exit');
+    outgoing.classList.remove('active');
+    setTimeout(()=> outgoing.classList.remove('exit'), 280);
+  }
+  if(incoming){
+    incoming.classList.add('active');
+    incoming.scrollTop = 0;
+  }
+  nav.forEach(n=> n.classList.toggle('active', n.dataset.to===id));
+  const idx = sections.findIndex(s=> s.id===id);
+  const names = {about:'About', skills:'Skills', projects:'Projects', cv:'Why me'};
+  const pageHeader = document.getElementById('pageHeader');
+  if(pageHeader) pageHeader.textContent = String(idx+1).padStart(2,'0') + ' : ' + (names[id] || id);
+  const prevIdx = (idx - 1 + sections.length) % sections.length;
+  const nextIdx = (idx + 1) % sections.length;
+  const prevLabel = document.getElementById('prevLabel');
+  const nextLabel = document.getElementById('nextLabel');
+  if(prevLabel) prevLabel.textContent = String(prevIdx+1).padStart(2,'0') + ' : ' + names[sections[prevIdx].id];
+  if(nextLabel) nextLabel.textContent = String(nextIdx+1).padStart(2,'0') + ' : ' + names[sections[nextIdx].id];
+  curId = id;
+  const name = document.querySelector('.head-name');
+  if(name){
+    name.classList.remove('pop');
+    void name.offsetWidth;
+    name.classList.add('pop');
+    setTimeout(()=> name.classList.remove('pop'), 400);
+  }
+}
+// gentle parallax on logos, 4px max
+const parallaxLogos = document.querySelectorAll('#top-logo, #corner-logo, .corner-logo');
+if(parallaxLogos.length && !window.matchMedia('(hover: none)').matches){
+  let raf = null;
+  let tx = 0, ty = 0;
+  window.addEventListener('mousemove', e=>{
+    const nx = (e.clientX / window.innerWidth - 0.5) * 8;
+    const ny = (e.clientY / window.innerHeight - 0.5) * 8;
+    tx = Math.max(-4, Math.min(4, nx));
+    ty = Math.max(-4, Math.min(4, ny));
+    if(!raf){
+      raf = requestAnimationFrame(()=>{
+        parallaxLogos.forEach(el=> el.style.transform = `translate(${tx}px, ${ty}px)`);
+        raf = null;
+      });
     }
+  });
+  window.addEventListener('mouseleave', ()=>{
+    parallaxLogos.forEach(el=> el.style.transform = 'translate(0,0)');
+  });
 }
+nav.forEach(a=>{
+  a.addEventListener('click', ()=> show(a.dataset.to));
+});
+document.addEventListener('keydown', e=>{
+  if(e.target.matches('input, textarea, select, [contenteditable]')) return;
+  if(e.metaKey || e.ctrlKey || e.altKey) return;
+  if(e.key>='1' && e.key<='4'){
+    const idx = parseInt(e.key,10)-1;
+    if(idx < sections.length && sections[idx]) show(sections[idx].id);
+    return;
+  }
+  const cur = sections.findIndex(s=> s.classList.contains('active'));
+  if(e.key==='ArrowRight' || e.key==='ArrowDown' || e.key==='PageDown'){
+    let next = cur + 1;
+    if(next>=sections.length) next = 0;
+    show(sections[next].id);
+    e.preventDefault();
+  } else if(e.key==='ArrowLeft' || e.key==='ArrowUp' || e.key==='PageUp'){
+    let next = cur - 1;
+    if(next<0) next = sections.length-1;
+    show(sections[next].id);
+    e.preventDefault();
+  }
+});
+document.getElementById('prevBtn')?.addEventListener('click', ()=>{
+  const cur = sections.findIndex(s=> s.classList.contains('active'));
+  let next = cur-1; if(next<0) next=sections.length-1; show(sections[next].id);
+});
+document.getElementById('nextBtn')?.addEventListener('click', ()=>{
+  const cur = sections.findIndex(s=> s.classList.contains('active'));
+  let next = cur+1; if(next>=sections.length) next=0; show(sections[next].id);
+});
 
-// ── Panel active state (desktop) ──────────────────────────────────────────────
 
-function initPanels() {
-    if (isTouchDevice()) return;
+// Mobile swipe for deck
+(function initSwipe(){
+  const deck = document.getElementById('deck');
+  if(!deck) return;
+  let startX = 0, startY = 0, isSwipe = false;
+  deck.addEventListener('touchstart', e=>{
+    if(e.touches.length!==1) return;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isSwipe = false;
+  }, {passive:true});
+  deck.addEventListener('touchmove', e=>{
+    if(!startX) return;
+    const dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) isSwipe = true;
+  }, {passive:true});
+  deck.addEventListener('touchend', e=>{
+    if(!isSwipe) { startX=0; return; }
+    const dx = e.changedTouches[0].clientX - startX;
+    const cur = sections.findIndex(s=> s.classList.contains('active'));
+    if(Math.abs(dx) > 40){
+      if(dx < 0){
+        let next = cur + 1; if(next>=sections.length) next = 0; show(sections[next].id);
+      } else {
+        let next = cur - 1; if(next<0) next = sections.length-1; show(sections[next].id);
+      }
+    }
+    startX=0; isSwipe=false;
+  }, {passive:true});
+})();
 
-    const panels = document.querySelectorAll('.panel');
+// IE11 detection and fallback
+(function ieFallback(){
+  const isIE = !!window.MSInputMethodContext && !!document.documentMode;
+  const isOld = isIE || !window.fetch || !window.Promise || !('assign' in Object);
+  if(isOld){
+    document.documentElement.classList.add('is-legacy');
+    // show all slides linearly and disable deck animations
+    sections.forEach(s=> { s.style.position='relative'; s.style.display='block'; s.style.opacity='1'; s.style.transform='none'; });
+    const deck = document.getElementById('deck');
+    if(deck){ deck.style.overflow='visible'; deck.style.height='auto'; }
+    const nav = document.getElementById('mainNav');
+    if(nav) nav.style.display='none';
+    const controls = document.querySelector('.slide-controls');
+    if(controls) controls.style.display='none';
+    // simple polyfill for fetch if needed
+    if(!window.fetch){
+      const msg = document.getElementById('projects-container');
+      if(msg) msg.innerHTML = '<p style="color:var(--muted); padding:12px;">Projects require a modern browser. Visit <a href="https://github.com/CtrlUserKnown">GitHub</a> directly.</p>';
+    }
+  }
+})();
 
-    // About is open by default so the page never looks blank on first load
-    document.getElementById('panel-about')?.classList.add('active');
+// Firefox focus ring improvement
+document.addEventListener('keydown', e=>{
+  if(e.key==='Tab') document.documentElement.classList.add('using-keyboard');
+});
+document.addEventListener('mousedown', ()=> document.documentElement.classList.remove('using-keyboard'));
 
-    panels.forEach(panel => {
-        panel.addEventListener('mouseenter', () => {
-            panels.forEach(p => p.classList.remove('active'));
-            panel.classList.add('active');
-        });
-    });
-}
+// Safari: handle 100vh jump on address bar hide/show
+(function safariVhFix(){
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  if(!isSafari) return;
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+  window.addEventListener('resize', ()=>{
+    vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  });
+})();
 
-// ── Mobile / touch ────────────────────────────────────────────────────────────
-
-const isTouchDevice = () => window.matchMedia('(hover: none)').matches || window.innerWidth <= 640;
-
-function initTouch() {
-    if (!isTouchDevice()) return;
-
-    document.querySelectorAll('.panel').forEach(panel => {
-        const label = panel.querySelector('.panel-label');
-        label.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = panel.classList.contains('open');
-            document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
-            if (!isOpen) panel.classList.add('open');
-        });
-    });
-
-    // Open About by default on mobile
-    const about = document.getElementById('panel-about');
-    if (about) about.classList.add('open');
-}
-
-// ── Theme Toggle ──────────────────────────────────────────────────────────────
-
+// Theme - follows system
 const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-function getEffectiveTheme() {
-    return document.documentElement.getAttribute('data-theme')
-        || (systemDark.matches ? 'dark' : 'light');
+function getEffectiveTheme(){
+  return document.documentElement.getAttribute('data-theme') || (systemDark.matches ? 'dark' : 'light');
 }
-
-function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-
-    const btn = document.getElementById('theme-toggle');
-    if (btn) {
-        btn.textContent = theme === 'dark' ? '☀' : '☽';
-        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-    }
-
-    const favicon = document.getElementById('favicon');
-    if (favicon) {
-        favicon.href = `img/favicon/${theme === 'dark' ? 'Dark' : 'Light'}ModeFavicon.svg`;
-    }
-
-    const logoMain = document.querySelector('.about-logo .logo-main');
-    const logoAlt  = document.querySelector('.about-logo .logo-alt');
-    if (logoMain) logoMain.src = `img/Logo/logo-${theme}.svg`;
-    if (logoAlt)  logoAlt.src  = `img/Logo/logo-${theme}-alt.svg`;
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme', theme);
+  const favicon = document.getElementById('favicon');
+  if(favicon) favicon.href = `img/fav/CJA_logo_AB21_${theme==='dark'?'white':'black'}.svg`;
+  const topLogo = document.getElementById('top-logo');
+  if(topLogo) topLogo.src = `img/svg/CJA_logo_AB21_${theme==='dark'?'white':'black'}.svg`;
+  document.querySelectorAll('#corner-logo, .corner-logo').forEach(el=>{
+    el.src = `img/svg/CJA_logo_AB21_${theme==='dark'?'white':'black'}.svg`;
+  });
 }
-
-function initTheme() {
-    const saved = localStorage.getItem('theme');
-    applyTheme(saved || (systemDark.matches ? 'dark' : 'light'));
-
-    // Follow system changes only while the user hasn't set a manual preference
-    systemDark.addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-            applyTheme(e.matches ? 'dark' : 'light');
-        }
-    });
-
-    document.getElementById('theme-toggle')?.addEventListener('click', () => {
-        const next = getEffectiveTheme() === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('theme', next);
-        applyTheme(next);
-    });
-}
-
-// ── Nav Hint ──────────────────────────────────────────────────────────────────
-
-function initNavHint() {
-    if (sessionStorage.getItem('nav-hint-dismissed')) return;
-
-    const hint = document.getElementById('nav-hint');
-    const closeBtn = document.getElementById('nav-hint-close');
-    const text = document.getElementById('nav-hint-text');
-    if (!hint) return;
-
-    text.textContent = isTouchDevice()
-        ? 'Tap a section to expand'
-        : 'Hover a panel to explore';
-
-    let timer;
-
-    function dismiss() {
-        clearTimeout(timer);
-        hint.classList.add('hiding');
-        hint.addEventListener('transitionend', () => hint.remove(), { once: true });
-        sessionStorage.setItem('nav-hint-dismissed', '1');
-    }
-
-    closeBtn.addEventListener('click', dismiss);
-
-    // Show after a short delay so the page settles first
-    setTimeout(() => {
-        hint.classList.add('visible');
-        timer = setTimeout(dismiss, 5000);
-    }, 800);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    initTheme();
-    initTouch();
-    initPanels();
-    loadGitHubProjects();
-    initNavHint();
+(function initTheme(){
+  applyTheme(systemDark.matches ? 'dark' : 'light');
+  systemDark.addEventListener('change', e=> applyTheme(e.matches ? 'dark' : 'light'));
+})();
+document.getElementById('theme-toggle')?.addEventListener('click', ()=>{
+  const next = getEffectiveTheme() === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
 });
 
-window.addEventListener('resize', () => {
-    const panels = document.querySelectorAll('.panel');
-    if (!isTouchDevice()) {
-        panels.forEach(p => p.classList.remove('open'));
-        // Restore a default active panel if none is set (e.g. after switching from mobile)
-        if (!document.querySelector('.panel.active')) {
-            document.getElementById('panel-about')?.classList.add('active');
-        }
-    } else {
-        panels.forEach(p => p.classList.remove('active'));
+// GitHub Projects - uses docket layout, no em dashes
+const GITHUB_USERNAME = 'CtrlUserKnown';
+const FEATURED_REPOS = ['Charvim','dots','GabyLearnsPython','pylings-tui','Capella.it2249','Capella.it3240'];
+async function loadGitHubProjects(){
+  const container = document.getElementById('projects-container');
+  if(!container) return;
+  try{
+    const results = await Promise.all(FEATURED_REPOS.map(name =>
+      fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${name}`, {headers:{Accept:'application/vnd.github+json'}})
+        .then(r=> r.ok ? r.json() : null).catch(()=>null)
+    ));
+    const repos = results.filter(Boolean);
+    if(repos.length===0){
+      container.innerHTML = '<p style="color:var(--muted); padding:12px;">Could not load projects right now.</p>';
+      return;
     }
-});
-
-// Safari keeps a frozen page snapshot in its Back-Forward Cache (bfcache).
-// When the user taps Back from an external link, Safari restores that snapshot
-// instead of fetching a fresh copy. Detecting event.persisted and reloading
-// forces Safari to request the current version from the network (or SW cache).
-window.addEventListener('pageshow', event => {
-    if (event.persisted) window.location.reload();
-});
+    container.innerHTML = repos.map((repo,i)=>{
+      const title = repo.name.replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase());
+      const desc = repo.description || 'No description yet.';
+      const updated = new Date(repo.updated_at).toLocaleDateString('en-US',{month:'short', year:'numeric'});
+      const topics = (repo.topics||[]).slice(0,3).map(t=>`<span>${t}</span>`).join('');
+      const lang = !topics && repo.language ? `<span>${repo.language}</span>` : '';
+      const tags = topics || lang ? `<span class="docket-tags">${topics}${lang}</span>` : '';
+      return `<a class="docket" href="${repo.html_url}" target="_blank" rel="noopener">
+        <span class="docket-id">${String(i+1).padStart(2,'0')}</span>
+        <span class="docket-name">${title}</span>
+        <span class="docket-desc">${desc}</span>
+        ${tags}
+        <span class="docket-date">${updated}</span>
+      </a>`;
+    }).join('');
+  }catch{
+    container.innerHTML = '<p style="color:var(--muted); padding:12px;">Could not load projects right now.</p>';
+  }
+}
+document.addEventListener('DOMContentLoaded', loadGitHubProjects);
+window.addEventListener('pageshow', e=>{ if(e.persisted) window.location.reload(); });

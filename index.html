@@ -3,33 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Christian Alvarez — CS student, graphic designer, digital artist, and IT technician based in Chicago.">
+    <meta name="description" content="Christian Alvarez, CS student, graphic designer, digital artist, and IT technician based in Chicago.">
     <title>Christian Alvarez</title>
-
-    <!-- Link preview (Open Graph) -->
     <meta property="og:type"        content="website">
     <meta property="og:url"         content="https://ctrluserknown.github.io/website-ctrluserknown/">
     <meta property="og:title"       content="Christian Alvarez">
     <meta property="og:description" content="CS student, graphic designer, digital artist, and IT technician based in Chicago. Open to opportunities in tech and creative fields.">
     <meta property="og:image"       content="https://ctrluserknown.github.io/website-ctrluserknown/preview.png">
-
-    <!-- Twitter / X card -->
     <meta name="twitter:card"        content="summary_large_image">
     <meta name="twitter:title"       content="Christian Alvarez">
     <meta name="twitter:description" content="CS student, graphic designer, digital artist, and IT technician based in Chicago.">
     <meta name="twitter:image"       content="https://ctrluserknown.github.io/website-ctrluserknown/preview.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" id="favicon" href="img/favicon/DarkModeFavicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32.png">
-    <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+    <link rel="icon" id="favicon" href="img/fav/CJA_logo_AB21_black.svg">
+    <link rel="icon" type="image/svg+xml" href="img/svg/CJA_logo_AB21_black.svg">
+    <link rel="apple-touch-icon" href="img/fav/CJA_logo_AB21_black.svg">
     <link rel="manifest" href="site.webmanifest">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#13181B">
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F0EEEB">
-    <!-- Apply saved theme + matching favicon before first paint -->
-    <script>(function(){var t=localStorage.getItem('theme'),dark=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(t)document.documentElement.setAttribute('data-theme',t);var f=document.getElementById('favicon');if(f)f.href='img/favicon/'+(dark?'Dark':'Light')+'ModeFavicon.svg';}());</script>
+    <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#111110">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F6F1E6">
+    <script>(function(){var dark=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',dark?'dark':'light');var f=document.getElementById('favicon');if(f)f.href='img/fav/CJA_logo_AB21_'+(dark?'white':'black')+'.svg';}());</script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -39,309 +34,132 @@
       "image": "https://ctrluserknown.github.io/website-ctrluserknown/preview.png",
       "jobTitle": ["IT Student", "Graphic Designer", "Digital Artist", "Programming Tutor"],
       "description": "CS student, graphic designer, digital artist, and IT technician based in Chicago.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Chicago",
-        "addressRegion": "IL",
-        "addressCountry": "US"
-      },
+      "address": {"@type": "PostalAddress","addressLocality": "Chicago","addressRegion": "IL","addressCountry": "US"},
       "email": "alvarez.christian46@outlook.com",
-      "sameAs": [
-        "https://github.com/CtrlUserKnown",
-        "https://www.linkedin.com/in/calvarez042/"
-      ],
-      "knowsAbout": [
-        "Python", "Java", "C++", "JavaScript", "HTML", "CSS", "SQL", "Bash",
-        "Graphic Design", "Digital Illustration", "Animation", "SEO",
-        "IT Support", "Adobe Photoshop", "Adobe Lightroom", "Affinity Suite",
-        "Procreate", "Canva", "Linux"
-      ],
-      "alumniOf": [
-        {
-          "@type": "CollegeOrUniversity",
-          "name": "Capella University",
-          "sameAs": "https://www.capella.edu/"
-        },
-        {
-          "@type": "CollegeOrUniversity",
-          "name": "City Colleges of Chicago",
-          "sameAs": "https://www.ccc.edu/"
-        }
-      ],
-      "hasCredential": [
-        {
-          "@type": "EducationalOccupationalCredential",
-          "name": "B.S. in Information Technology",
-          "credentialCategory": "degree",
-          "educationalLevel": "bachelor's degree",
-          "recognizedBy": {
-            "@type": "CollegeOrUniversity",
-            "name": "Capella University",
-            "sameAs": "https://www.capella.edu/"
-          }
-        },
-        {
-          "@type": "EducationalOccupationalCredential",
-          "name": "A.A.S. in Information Technology",
-          "credentialCategory": "degree",
-          "educationalLevel": "associate degree",
-          "recognizedBy": {
-            "@type": "CollegeOrUniversity",
-            "name": "City Colleges of Chicago",
-            "sameAs": "https://www.ccc.edu/"
-          }
-        }
-      ]
+      "sameAs": ["https://github.com/CtrlUserKnown","https://www.linkedin.com/in/calvarez042/"],
+      "knowsAbout": ["Python","Java","C++","JavaScript","HTML","CSS","SQL","Bash","Graphic Design","Digital Illustration","Animation","SEO","IT Support","Adobe Photoshop","Adobe Lightroom","Affinity Suite","Procreate","Canva","Linux"],
+      "alumniOf": [{"@type": "CollegeOrUniversity","name": "Capella University","sameAs": "https://www.capella.edu/"},{"@type": "CollegeOrUniversity","name": "City Colleges of Chicago","sameAs": "https://www.ccc.edu/"}],
+      "hasCredential": [{"@type": "EducationalOccupationalCredential","name": "B.S. in Information Technology","credentialCategory": "degree","educationalLevel": "bachelor's degree","recognizedBy": {"@type": "CollegeOrUniversity","name": "Capella University"}},{"@type": "EducationalOccupationalCredential","name": "A.A.S. in Information Technology","credentialCategory": "degree","educationalLevel": "associate degree","recognizedBy": {"@type": "CollegeOrUniversity","name": "City Colleges of Chicago"}}]
     }
     </script>
 </head>
 <body>
-    <div class="panels">
-
-        <!-- Panel 1: About -->
-        <div class="panel" id="panel-about">
-            <div class="panel-label">
-                <span>About</span>
-            </div>
-            <div class="panel-content">
-                <div class="about-logo" aria-hidden="true">
-                    <img class="logo-main" src="img/Logo/logo-dark.svg" width="47" height="44" alt="">
-                    <img class="logo-alt"  src="img/Logo/logo-dark-alt.svg" width="49" height="42" alt="">
-                </div>
-                <div class="panel-inner">
-                    <div class="about-header">
-                        <div class="about-header-text">
-                            <p class="overline">Portfolio</p>
-                            <h1>Christian<br>Alvarez</h1>
-                            <p class="subtitle">CS Student &middot; Designer &middot; Artist</p>
-                        </div>
-                    </div>
-
-                    <div class="section">
-                        <h2>Education</h2>
-                        <div class="item">
-                            <strong>Capella University</strong>
-                            <span>B.S. in Information Technology</span>
-                            <span class="badge">In Progress &middot; Expected April 2027</span>
-                            <span>GPA: 4.0</span>
-                            <span>Member, National Society of Leadership and Success <i>(ΣΑΠ)</i> &mdash; Capella Chapter</span>
-                        </div>
-                        <div class="item" style="margin-top:1rem">
-                            <strong>City Colleges of Chicago</strong>
-                            <span>A.A.S. in Information Technology</span>
-                        </div>
-                    </div>
-
-                    <div class="section">
-                        <h2>Experience</h2>
-                        <div class="item">
-                            <strong>IT Technician (Volunteer)</strong>
-                            <span>MVA Church Alliance</span>
-                            <span class="muted-text">July 2016 – Present</span>
-                            <p class="item-desc">Troubleshoot hardware, software, and network issues for non-technical users. Support device setup, software education, and ongoing IT needs for the organization.</p>
-                        </div>
-                        <div class="item" style="margin-top:1.25rem">
-                            <strong>Freelance Graphic Designer &amp; Social Media Manager</strong>
-                            <span>Self-Employed</span>
-                            <span class="muted-text">2020 – Present</span>
-                            <p class="item-desc">Design marketing collateral and manage social media accounts for small artists and businesses across Chicago. Tools include Adobe Photoshop, Lightroom, Affinity Suite, and Canva. Work also spans digital illustration and animation through Procreate.</p>
-                        </div>
-                        <div class="item" style="margin-top:1.25rem">
-                            <strong>Programming Tutor &amp; Mentor</strong>
-                            <span>Independent</span>
-                            <span class="muted-text">Present</span>
-                            <p class="item-desc">Tutor individuals in Python and scripting languages including Bash and ZSH. Help people new to programming build foundational skills and problem-solving habits. Previously trained and supervised staff in professional settings including food &amp; beverage service and maritime operations.</p>
-                        </div>
-                    </div>
-
-                    <div class="section">
-                        <h2>Contact</h2>
-                        <div class="links">
-                            <a href="https://github.com/CtrlUserKnown" target="_blank" rel="noopener">GitHub</a>
-                            <a href="https://www.linkedin.com/in/calvarez042/" target="_blank" rel="noopener">LinkedIn</a>
-                            <a href="mailto:alvarez.christian46@outlook.com">Email</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Panel 2: Skills -->
-        <div class="panel" id="panel-skills">
-            <div class="panel-label">
-                <span>Skills</span>
-            </div>
-            <div class="panel-content">
-                <div class="panel-inner">
-                    <p class="overline">Technical</p>
-                    <h1>Skills</h1>
-                    <p class="subtitle">What I work with</p>
-
-                    <div class="section">
-                        <h2>Programming Languages</h2>
-                        <div class="tag-grid">
-                            <span class="tag">Python</span>
-                            <span class="tag">Java</span>
-                            <span class="tag">C++</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">HTML / CSS</span>
-                            <span class="tag">SQL</span>
-                            <span class="tag">Bash</span>
-                            <span class="tag">ZSH</span>
-                        </div>
-                    </div>
-
-                    <div class="section">
-                        <h2>Concepts</h2>
-                        <div class="tag-grid">
-                            <span class="tag">Data Structures</span>
-                            <span class="tag">Algorithms</span>
-                            <span class="tag">Object-Oriented Programming</span>
-                            <span class="tag">Version Control</span>
-                            <span class="tag">Linux / CLI</span>
-                            <span class="tag">Problem Solving</span>
-                        </div>
-                    </div>
-
-                    <div class="section">
-                        <h2>Tools</h2>
-                        <div class="tag-grid">
-                            <span class="tag">Git</span>
-                            <span class="tag">GitHub</span>
-                            <span class="tag">VS Code</span>
-                        </div>
-                    </div>
-
-                    <div class="section">
-                        <h2>Design &amp; Media</h2>
-                        <div class="tag-grid">
-                            <span class="tag">Adobe Photoshop</span>
-                            <span class="tag">Lightroom</span>
-                            <span class="tag">Affinity Suite</span>
-                            <span class="tag">Canva</span>
-                            <span class="tag">Procreate</span>
-                            <span class="tag">Digital Illustration</span>
-                            <span class="tag">Animation</span>
-                            <span class="tag">Graphic Design</span>
-                            <span class="tag">SEO</span>
-                        </div>
-                    </div>
-
-                    <div class="section">
-                        <h2>Training &amp; Leadership</h2>
-                        <div class="tag-grid">
-                            <span class="tag">1-on-1 Tutoring</span>
-                            <span class="tag">Staff Training</span>
-                            <span class="tag">Mentorship</span>
-                            <span class="tag">Team Supervision</span>
-                        </div>
-                    </div>
-
-                    <div class="section">
-                        <h2>Spoken Languages</h2>
-                        <div class="tag-grid">
-                            <span class="tag">English</span>
-                            <span class="tag">Spanish</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Panel 3: Projects -->
-        <div class="panel" id="panel-projects">
-            <div class="panel-label">
-                <span>Projects</span>
-            </div>
-            <div class="panel-content">
-                <div class="panel-inner">
-                    <p class="overline">Work</p>
-                    <h1>Projects</h1>
-                    <p class="subtitle">Things I've built</p>
-
-                    <div class="section" id="projects-container">
-                        <p class="muted-text">Loading projects...</p>
-                    </div>
-
-                    <div class="links">
-                        <a href="https://github.com/CtrlUserKnown" target="_blank" rel="noopener">View all on GitHub &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Panel 4: Why Hire Me -->
-        <div class="panel" id="panel-cv">
-            <div class="panel-label">
-                <span>Why Me</span>
-            </div>
-            <div class="panel-content">
-                <div class="panel-inner">
-                    <p class="overline">CV</p>
-                    <h1>Why Hire Me</h1>
-                    <p class="subtitle">The short version</p>
-
-                    <div class="pitch">
-                        <p>I'm an IT student, a graphic designer, a digital artist, an animator, a tutor, and a former supervisor. I've always been drawn to learning things for real rather than staying in one lane, and that habit has shaped a lot of what I can bring to a role.</p>
-                    </div>
-
-                    <div class="section">
-                        <h2>What I bring</h2>
-                        <div class="cv-list">
-                            <div class="cv-item">
-                                <div class="cv-bullet"></div>
-                                <div>
-                                    <strong>Genuinely multifaceted</strong>
-                                    <p>IT support, graphic design, digital illustration, animation, social media, SEO, scripting. These aren't directions I'm considering, they're things I've put real time into and actively use.</p>
-                                </div>
-                            </div>
-                            <div class="cv-item">
-                                <div class="cv-bullet"></div>
-                                <div>
-                                    <strong>Creative depth, not just technical breadth</strong>
-                                    <p>I animate and illustrate in Procreate alongside the design work I do for clients. Having both a creative and technical side has shaped how I approach problems and how I communicate ideas to people who need to understand them.</p>
-                                </div>
-                            </div>
-                            <div class="cv-item">
-                                <div class="cv-bullet"></div>
-                                <div>
-                                    <strong>I teach what I know</strong>
-                                    <p>I currently tutor people in Python, Bash, and ZSH. Before that, I trained and supervised staff in professional settings. Teaching forces genuine understanding, and it's something I take seriously for that reason.</p>
-                                </div>
-                            </div>
-                            <div class="cv-item">
-                                <div class="cv-bullet"></div>
-                                <div>
-                                    <strong>Self-driven by default</strong>
-                                    <p>SEO, design tools, scripting, animation. Most of what I know came from learning on my own because I wanted to, not because it was required. That approach tends to stick past the end of any given project.</p>
-                                </div>
-                            </div>
-                            <div class="cv-item">
-                                <div class="cv-bullet"></div>
-                                <div>
-                                    <strong>Reliable when it counts</strong>
-                                    <p>Nearly a decade of volunteer IT work. Real freelance clients. Real people I've trained and led. I show up, follow through, and take the work seriously whether or not anyone is checking.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="links">
-                        <a href="mailto:alvarez.christian46@outlook.com">Get in touch &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+<div class="shell">
+  <div class="top-bar">
+    <div class="top-block status-block">
+      <small>STATUS</small>
+      <strong>Open to work</strong>
     </div>
-
-    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode">☀</button>
-
-    <div class="nav-hint" id="nav-hint">
-        <span class="nav-hint-text" id="nav-hint-text">Hover a panel to explore</span>
-        <button class="nav-hint-close" id="nav-hint-close" aria-label="Dismiss">&#x2715;</button>
+    <div class="top-block logo-block">
+      <img id="top-logo" src="img/svg/CJA_logo_AB21_black.svg" alt="Christian Alvarez logo" width="28" height="36" style="display:block; width:28px; height:auto;">
     </div>
+    <div class="top-block name-block">
+      <span>Christian Alvarez</span>
+      <small>Chicago, IL</small>
+    </div>
+    <div class="top-separator" aria-hidden="true"></div>
+    <div class="top-block page-header-block" id="pageHeader">01 : About</div>
+    <div class="top-block links-block">
+      <a href="https://github.com/CtrlUserKnown" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/calvarez042/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:alvarez.christian46@outlook.com">Email</a>
+      <button id="theme-toggle" aria-label="Switch theme">◐</button>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
+  <nav class="main-nav" id="mainNav">
+    <a data-to="about" class="active"><small>01</small><strong>About</strong></a>
+    <a data-to="skills"><small>02</small><strong>Skills</strong></a>
+    <a data-to="projects"><small>03</small><strong>Projects</strong></a>
+    <a data-to="cv"><small>04</small><strong>Why me</strong></a>
+  </nav>
+
+  <div class="deck" id="deck">
+    <!-- SLIDE 01: ABOUT -->
+    <section class="slide active" id="about">
+      <div class="slide-body">
+        <div class="plate-head"><span class="plate-num">01 <span>ABOUT</span></span><span class="plate-title">About</span></div>
+        <div class="plate-caption">Education, experience, and how to reach me.</div>
+        <div class="plate-body-inner">
+          <div class="ledger">
+            <div class="col">
+              <h3>Education</h3>
+              <div class="entry"><div class="entry-top"><span class="entry-name">Capella University</span><span class="entry-date">Exp. Apr 2027</span></div><div class="entry-role">B.S. in Information Technology · GPA 4.0</div><div class="badges"><span class="badge">In Progress</span><span class="badge">NSLS ΣΑΠ</span></div></div>
+              <div class="entry"><div class="entry-top"><span class="entry-name">City Colleges of Chicago</span></div><div class="entry-role">A.A.S. in Information Technology</div></div>
+              <h3 style="margin-top:22px">Contact</h3>
+              <div class="links"><a href="https://github.com/CtrlUserKnown" target="_blank" rel="noopener">GitHub</a><a class="ghost" href="https://www.linkedin.com/in/calvarez042/" target="_blank" rel="noopener">LinkedIn</a><a class="ghost" href="mailto:alvarez.christian46@outlook.com">Email</a></div>
+            </div>
+            <div class="col">
+              <h3>Experience</h3>
+              <div class="entry"><div class="entry-top"><span class="entry-name">IT Technician (Volunteer)</span><span class="entry-date">2016–Present</span></div><div class="entry-role">MVA Church Alliance</div><p class="entry-desc">Hardware, software and network triage for non-technical users. Device setup and ongoing support.</p></div>
+              <div class="entry"><div class="entry-top"><span class="entry-name">Freelance Designer & SMM</span><span class="entry-date">2020–Present</span></div><p class="entry-desc">Marketing and social for small Chicago artists and businesses. Photoshop, Lightroom, Affinity, Canva - plus Procreate illustration and animation.</p></div>
+              <div class="entry"><div class="entry-top"><span class="entry-name">Tutor & Mentor</span></div><p class="entry-desc">1:1 in Python, Bash and ZSH. Former staff trainer in hospitality and maritime ops. Teaching as the honesty check.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 02: SKILLS -->
+    <section class="slide" id="skills">
+      <div class="slide-body">
+        <div class="plate-head"><span class="plate-num">02 <span>SKILLS</span></span><span class="plate-title">Skills</span></div>
+        <div class="plate-caption">Languages, concepts, tools, and focus areas.</div>
+        <div class="plate-body-inner">
+          <div class="stamp-grid">
+            <div class="stamp"><h4>Languages</h4><div class="tags"><span>Python</span><span>Java</span><span>C++</span><span>JavaScript</span><span>HTML / CSS</span><span>SQL</span><span>Bash</span><span>ZSH</span></div></div>
+            <div class="stamp"><h4>Concepts</h4><div class="tags"><span>Data Structures</span><span>Algorithms</span><span>OOP</span><span>Version Control</span><span>Linux / CLI</span></div></div>
+            <div class="stamp"><h4>Tools</h4><div class="tags"><span>Git</span><span>GitHub</span><span>VS Code</span></div></div>
+            <div class="stamp"><h4>Design & Media</h4><div class="tags"><span>Photoshop</span><span>Lightroom</span><span>Affinity</span><span>Canva</span><span>Procreate</span><span>Illustration</span><span>Animation</span><span>SEO</span></div></div>
+            <div class="stamp"><h4>Training</h4><div class="tags"><span>Tutoring</span><span>Staff Training</span><span>Mentorship</span></div></div>
+            <div class="stamp"><h4>Languages</h4><div class="tags"><span>English</span><span>Spanish</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 03: PROJECTS -->
+    <section class="slide" id="projects">
+      <div class="slide-body">
+        <div class="plate-head"><span class="plate-num">03 <span>PROJECTS</span></span><span class="plate-title">Projects</span></div>
+        <div class="plate-caption">Selected work. Live from GitHub.</div>
+        <div class="plate-body-inner">
+          <div class="docket-list" id="projects-container"><div style="padding:18px; color:var(--muted); font-size:0.8rem">Loading projects…</div></div>
+          <div class="links" style="margin-top:16px"><a class="ghost" href="https://github.com/CtrlUserKnown" target="_blank" rel="noopener">View all on GitHub →</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 04: WHY ME -->
+    <section class="slide" id="cv">
+      <div class="slide-body">
+        <div class="plate-head"><span class="plate-num">04 <span>OVERVIEW</span></span><span class="plate-title">Why hire me</span></div>
+        <div class="plate-caption">A brief summary of what I bring.</div>
+        <div class="plate-body-inner">
+          <div class="pitch">“I’m an IT student, a graphic designer, a digital artist, an animator, a tutor and a former supervisor. I’ve always been drawn to learning things for real rather than staying in one lane.”</div>
+          <div class="cv-rows">
+            <div class="cv-row"><strong>Genuinely multifaceted</strong><p>IT support, design, illustration, animation, social, SEO and scripting. Put real time into each, and still use them.</p></div>
+            <div class="cv-row"><strong>Creative depth, not just breadth</strong><p>Animation and illustration shape how I solve problems and explain them. Not just how things look.</p></div>
+            <div class="cv-row"><strong>I teach what I know</strong><p>Tutoring Python / Bash / ZSH now; trained and led staff before. Teaching forces real understanding.</p></div>
+            <div class="cv-row"><strong>Self-driven by default</strong><p>SEO, tools, scripting, animation. Learned because I wanted to, which is why it sticks.</p></div>
+            <div class="cv-row"><strong>Reliable when it counts</strong><p>Nearly a decade of volunteer IT, real freelance clients, real teams led. I follow through.</p></div>
+          </div>
+          <div class="links" style="margin-top:16px"><a href="mailto:alvarez.christian46@outlook.com">Get in touch →</a></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="slide-controls">
+    <button id="prevBtn" class="nav-box" aria-label="Previous"><span class="arrow">◀</span><span id="prevLabel">04 : Why me</span></button>
+    <button id="nextBtn" class="nav-box" aria-label="Next"><span id="nextLabel">02 : Skills</span><span class="arrow">▶</span></button>
+  </div>
+  <div class="ticket-foot">
+    <div class="foot-cell"><small>CONTACT</small><p><a href="mailto:alvarez.christian46@outlook.com" style="color:var(--ink); text-decoration:underline; text-underline-offset:3px;">alvarez.christian46@outlook.com</a><br><span style="color:var(--muted)">Chicago, IL. Remote available.</span></p></div>
+    <div class="foot-cell"><small>LINKS</small><p><a href="https://github.com/CtrlUserKnown" target="_blank" rel="noopener" style="color:var(--ink);">github.com/CtrlUserKnown</a> · <a href="https://www.linkedin.com/in/calvarez042/" target="_blank" rel="noopener" style="color:var(--ink);">LinkedIn</a><br><span style="color:var(--muted)">References available on request.</span></p></div>
+    <div class="foot-cell"><small>AVAILABILITY</small><p>Open to internships and junior roles.<br><span style="color:var(--muted)">Updated November 2026.</span></p></div>
+  </div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
