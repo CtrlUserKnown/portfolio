@@ -179,7 +179,7 @@ function getEffectiveTheme(){
 function applyTheme(theme){
   document.documentElement.setAttribute('data-theme', theme);
   const favicon = document.getElementById('favicon');
-  if(favicon) favicon.href = `img/fav/CJA_logo_AB21_${theme==='dark'?'white':'black'}.svg`;
+  if(favicon) favicon.href = `img/favicon/${theme==='dark'?'Dark':'Light'}ModeFavicon.svg`;
   const topLogo = document.getElementById('top-logo');
   if(topLogo) topLogo.src = `img/svg/CJA_logo_AB21_${theme==='dark'?'white':'black'}.svg`;
   document.querySelectorAll('#corner-logo, .corner-logo').forEach(el=>{
