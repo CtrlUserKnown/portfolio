@@ -444,3 +444,13 @@ body{
   .ledger, .stamp-grid, #projects .docket-list{display:block}
 }
 
+/* ensure logo visible before JS in dark mode */
+@media (prefers-color-scheme: dark){
+  #top-logo[src*="black.svg"]{filter:invert(1) brightness(1.05)}
+  #card-logo[src*="black.svg"]{filter:invert(1) brightness(1.05)}
+}
+[data-theme="dark"] #top-logo[src*="black.svg"],
+[data-theme="dark"] #card-logo[src*="black.svg"]{filter:invert(1) brightness(1.05)}
+[data-theme="light"] #top-logo,
+[data-theme="light"] #card-logo{filter:none}
+
