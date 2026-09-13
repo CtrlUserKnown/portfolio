@@ -230,5 +230,13 @@ async function loadGitHubProjects(){
     container.innerHTML = '<p style="color:var(--muted); padding:12px;">Could not load projects right now.</p>';
   }
 }
-document.addEventListener('DOMContentLoaded', loadGitHubProjects);
+
+// Signal loader after projects render
+document.addEventListener('DOMContentLoaded', function(){
+  loadGitHubProjects().then(function(){
+    if(window._cjaLoaderDone) window._cjaLoaderDone();
+  }).catch(function(){
+    if(window._cjaLoaderDone) window._cjaLoaderDone();
+  });
+});
 window.addEventListener('pageshow', e=>{ if(e.persisted) window.location.reload(); });
