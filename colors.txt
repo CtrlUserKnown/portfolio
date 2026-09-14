@@ -1,0 +1,6 @@
+Name :: Hex
+Seashell :: #F6E9E3
+Powder Blush :: #E4B5A5
+Amaranth :: #D54C5C
+Wine Plum :: #783345
+Midnight Violet :: #17002A

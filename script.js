@@ -197,7 +197,7 @@ document.getElementById('theme-toggle')?.addEventListener('click', ()=>{
 
 // GitHub Projects - uses docket layout, no em dashes
 const GITHUB_USERNAME = 'CtrlUserKnown';
-const FEATURED_REPOS = ['Charvim','dots','GabyLearnsPython','pylings-tui','Capella.it2249','Capella.it3240'];
+const FEATURED_REPOS = ['Charvim','ctrlvim','GabyLearnsPython','ssm','Capella.it2249','Capella.it3240'];
 async function loadGitHubProjects(){
   const container = document.getElementById('projects-container');
   if(!container) return;
